@@ -4,7 +4,7 @@
  */
  {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "vite-reference",
+	"name": "cognita-education-pl-7qhvdo6dryhh6roey0xi3",
 	"main": "worker/index.ts",
 	"compatibility_date": "2025-04-24",
 	"assets": {
