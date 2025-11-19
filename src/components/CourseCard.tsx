@@ -39,7 +39,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             <Book className="w-4 h-4" />
             <span>{course.lessons} Lessons</span>
           </div>
-          <span className="text-lg font-bold text-primary">${course.price}</span>
+          <span className="text-lg font-bold text-cognita-orange">${course.price}</span>
         </CardFooter>
       </Card>
     </Link>
