@@ -181,13 +181,13 @@ const CourseDetailPage = () => {
               <Card className="overflow-hidden">
                 <img src={course.imageUrl} alt={course.title} className="w-full h-auto object-cover" />
                 <CardContent className="p-6 space-y-4">
-                  <div className="text-4xl font-bold text-cognita-orange">${course.price}</div>
+                  <div className="text-4xl font-bold text-primary">${course.price}</div>
                   {isEnrolled ? (
                     <Button size="lg" className="w-full" asChild>
                       <Link to="/dashboard">Go to Dashboard</Link>
                     </Button>
                   ) : (
-                    <Button size="lg" className="w-full bg-cognita-orange hover:bg-cognita-orange/90 text-white" onClick={handleEnroll}>
+                    <Button size="lg" className="w-full" onClick={handleEnroll}>
                       Enroll Now
                     </Button>
                   )}

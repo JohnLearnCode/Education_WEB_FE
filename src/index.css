@@ -7,12 +7,12 @@
     /* Core Colors */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-    --primary: 28 93% 53%; /* Cognita Orange */
-    --primary-foreground: 0 0% 100%;
+    --primary: 221.2 83.2% 53.3%; /* New Blue */
+    --primary-foreground: 210 40% 98%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --border: 214.3 31.8% 91.4%;
-    --ring: 28 93% 53%;
+    --ring: 221.2 83.2% 53.3%; /* New Blue */
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
@@ -34,12 +34,12 @@
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-    --primary: 28 93% 53%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 221.2 83.2% 53.3%; /* New Blue */
+    --primary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
     --border: 217.2 32.6% 17.5%;
-    --ring: 28 93% 53%;
+    --ring: 221.2 83.2% 53.3%; /* New Blue */
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;

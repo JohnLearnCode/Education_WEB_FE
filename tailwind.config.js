@@ -93,7 +93,6 @@ export default {
   		},
   		colors: {
         'cognita-slate': 'rgb(30 41 59)',
-        'cognita-orange': 'rgb(249 115 22)',
         'cognita-neutral': 'rgb(248 250 252)',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

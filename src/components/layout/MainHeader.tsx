@@ -32,10 +32,10 @@ const MainHeader = () => {
           onClick={onLinkClick}
           className={({ isActive }) =>
             cn(
-              "text-base font-medium text-slate-700 dark:text-slate-300 transition-colors hover:text-cognita-orange dark:hover:text-cognita-orange",
-              isActive ? "text-cognita-orange" : "",
+              "text-base font-medium text-slate-700 dark:text-slate-300 transition-colors hover:text-primary dark:hover:text-primary",
+              isActive ? "text-primary" : "",
               "pb-1 border-b-2",
-              isActive ? "border-cognita-orange" : "border-transparent"
+              isActive ? "border-primary" : "border-transparent"
             )
           }
         >
@@ -49,7 +49,7 @@ const MainHeader = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2">
-            <BookOpen className="h-8 w-8 text-cognita-orange" />
+            <BookOpen className="h-8 w-8 text-primary" />
             <span className="text-2xl font-bold font-display text-cognita-slate dark:text-white">Cognita</span>
           </Link>
           <div className="hidden md:flex items-center space-x-6">
@@ -89,7 +89,7 @@ const MainHeader = () => {
                   <Button variant="ghost" asChild>
                     <Link to="/login">Log In</Link>
                   </Button>
-                  <Button className="bg-cognita-orange hover:bg-cognita-orange/90 text-white" asChild>
+                  <Button asChild>
                     <Link to="/signup">Sign Up</Link>
                   </Button>
                 </>
@@ -107,7 +107,7 @@ const MainHeader = () => {
                 <div className="flex flex-col h-full p-4">
                   <div className="flex justify-between items-center mb-8">
                     <Link to="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
-                      <BookOpen className="h-8 w-8 text-cognita-orange" />
+                      <BookOpen className="h-8 w-8 text-primary" />
                       <span className="text-2xl font-bold font-display text-cognita-slate dark:text-white">Cognita</span>
                     </Link>
                     <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)}>
@@ -122,8 +122,8 @@ const MainHeader = () => {
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={({ isActive }) =>
                           cn(
-                            "text-xl font-medium text-slate-700 dark:text-slate-200 transition-colors hover:text-cognita-orange",
-                            isActive ? "text-cognita-orange" : ""
+                            "text-xl font-medium text-slate-700 dark:text-slate-200 transition-colors hover:text-primary",
+                            isActive ? "text-primary" : ""
                           )
                         }
                       >
@@ -139,7 +139,7 @@ const MainHeader = () => {
                         <Button variant="outline" asChild>
                           <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>Log In</Link>
                         </Button>
-                        <Button className="bg-cognita-orange hover:bg-cognita-orange/90 text-white" asChild>
+                        <Button asChild>
                           <Link to="/signup" onClick={() => setIsMobileMenuOpen(false)}>Sign Up</Link>
                         </Button>
                       </>

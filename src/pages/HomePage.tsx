@@ -32,7 +32,7 @@ const HomePage = () => {
                 Discover a world of knowledge with our illustrative and engaging online courses. Learn from industry experts and join a vibrant community of learners.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <Button size="lg" className="bg-cognita-orange hover:bg-cognita-orange/90 text-white" asChild>
+                <Button size="lg" asChild>
                   <Link to="/courses">
                     Explore Courses <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
@@ -43,7 +43,7 @@ const HomePage = () => {
               </div>
             </div>
             <div>
-              <img src="https://placehold.co/600x400/F97316/FFFFFF?text=Illustration" alt="Learning illustration" className="rounded-lg shadow-lg" />
+              <img src="https://placehold.co/600x400/4F46E5/FFFFFF?text=Illustration" alt="Learning illustration" className="rounded-lg shadow-lg" />
             </div>
           </div>
         </div>

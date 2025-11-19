@@ -24,7 +24,7 @@ const MainFooter = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4 md:col-span-1">
             <Link to="/" className="flex items-center gap-2">
-              <BookOpen className="h-8 w-8 text-cognita-orange" />
+              <BookOpen className="h-8 w-8 text-primary" />
               <span className="text-2xl font-bold font-display text-cognita-slate dark:text-white">Cognita</span>
             </Link>
             <p className="text-muted-foreground text-base">
@@ -32,7 +32,7 @@ const MainFooter = () => {
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((link, index) => (
-                <a key={index} href={link.href} className="text-muted-foreground hover:text-cognita-orange transition-colors">
+                <a key={index} href={link.href} className="text-muted-foreground hover:text-primary transition-colors">
                   <link.icon className="h-6 w-6" />
                 </a>
               ))}
@@ -46,7 +46,7 @@ const MainFooter = () => {
                 <ul className="space-y-2">
                   {links.map((link) => (
                     <li key={link.label}>
-                      <Link to={link.href} className="text-muted-foreground hover:text-cognita-orange transition-colors">
+                      <Link to={link.href} className="text-muted-foreground hover:text-primary transition-colors">
                         {link.label}
                       </Link>
                     </li>
