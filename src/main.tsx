@@ -16,6 +16,7 @@ import CourseDetailPage from '@/pages/CourseDetailPage';
 import DashboardPage from '@/pages/DashboardPage';
 import LoginPage from '@/pages/LoginPage';
 import SignUpPage from '@/pages/SignUpPage';
+import ProtectedRoute from './components/ProtectedRoute';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardPage />,
+    element: (
+      <ProtectedRoute>
+        <DashboardPage />
+      </ProtectedRoute>
+    ),
     errorElement: <RouteErrorBoundary />,
   },
   {
