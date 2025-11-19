@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Star, Clock, BarChart, User, Send } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { useAuthStore } from '@/store/authStore';
 import { useCourseStore } from '@/store/courseStore';
 import { Textarea } from '@/components/ui/textarea';
@@ -117,9 +117,25 @@ const CourseDetailPage = () => {
             </Card>
             <Card>
               <CardContent className="p-6">
+                <h2 className="text-2xl font-bold mb-4">About the Instructor</h2>
+                <div className="flex items-start gap-4">
+                  <Avatar className="w-20 h-20">
+                    <AvatarImage src={course.instructor.avatar} />
+                    <AvatarFallback>{course.instructor.name.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h3 className="text-xl font-semibold">{course.instructor.name}</h3>
+                    <p className="text-muted-foreground">{course.instructor.title}</p>
+                    <p className="mt-2 text-sm text-muted-foreground">A passionate educator with over 10 years of experience in the field, dedicated to making learning accessible and enjoyable for everyone.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-6">
                 <h2 className="text-2xl font-bold mb-4">Student Reviews</h2>
                 {isEnrolled && (
-                  <form onSubmit={handleReviewSubmit} className="mb-8 p-4 border rounded-lg">
+                  <form onSubmit={handleReviewSubmit} className="mb-8 p-4 border rounded-lg bg-background">
                     <h3 className="text-lg font-semibold mb-2">Leave a Review</h3>
                     <div className="space-y-4">
                       <div>
