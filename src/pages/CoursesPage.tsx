@@ -21,9 +21,9 @@ const CoursesPage = () => {
 
   const levels = [
     { value: 'all', label: 'Tất cả cấp độ', color: 'bg-gray-400' },
-    { value: 'Beginner', label: 'Beginner (Cơ bản)', color: 'bg-green-500' },
-    { value: 'Intermediate', label: 'Intermediate (Trung cấp)', color: 'bg-yellow-500' },
-    { value: 'Advanced', label: 'Advanced (Nâng cao)', color: 'bg-red-500' },
+    { value: 'beginner', label: 'Beginner (Cơ bản)', color: 'bg-green-500' },
+    { value: 'intermediate', label: 'Intermediate (Trung cấp)', color: 'bg-yellow-500' },
+    { value: 'advanced', label: 'Advanced (Nâng cao)', color: 'bg-red-500' },
   ];
 
   useEffect(() => {
@@ -115,19 +115,19 @@ const CoursesPage = () => {
                     Tất cả cấp độ
                   </span>
                 </SelectItem>
-                <SelectItem value="Beginner">
+                <SelectItem value="beginner">
                   <span className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-green-500"></span>
                     Beginner (Cơ bản)
                   </span>
                 </SelectItem>
-                <SelectItem value="Intermediate">
+                <SelectItem value="intermediate">
                   <span className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
                     Intermediate (Trung cấp)
                   </span>
                 </SelectItem>
-                <SelectItem value="Advanced">
+                <SelectItem value="advanced">
                   <span className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-red-500"></span>
                     Advanced (Nâng cao)
@@ -158,7 +158,7 @@ const CoursesPage = () => {
               )}
               {level !== 'all' && (
                 <div className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
-                  <span>Cấp độ: {level}</span>
+                  <span>Cấp độ: {levels.find(l => l.value === level)?.label || level}</span>
                   <button
                     onClick={() => {
                       setLevel('all');
