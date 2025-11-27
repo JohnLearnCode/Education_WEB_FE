@@ -1,20 +1,17 @@
 import { create } from 'zustand';
-import { Course, Review, courses as initialCourses } from '@/lib/mockData';
+import { Review } from '@/lib/mockData';
+
 interface CourseState {
-  enrolledCourses: Map<number, { progress: number }>;
-  reviews: Map<number, Review[]>;
-  enrollCourse: (courseId: number) => void;
-  addReview: (courseId: number, review: Omit<Review, 'id'>) => void;
-  isEnrolled: (courseId: number) => boolean;
+  enrolledCourses: Map<string, { progress: number }>;
+  reviews: Map<string, Review[]>;
+  enrollCourse: (courseId: string) => void;
+  addReview: (courseId: string, review: Omit<Review, 'id'>) => void;
+  isEnrolled: (courseId: string) => boolean;
 }
-// Initialize reviews from mock data
-const initialReviews = new Map<number, Review[]>();
-initialCourses.forEach(course => {
-  initialReviews.set(course.id, course.reviews);
-});
+
 export const useCourseStore = create<CourseState>((set, get) => ({
   enrolledCourses: new Map(),
-  reviews: initialReviews,
+  reviews: new Map(),
   enrollCourse: (courseId) => {
     set((state) => {
       const newEnrolledCourses = new Map(state.enrolledCourses);

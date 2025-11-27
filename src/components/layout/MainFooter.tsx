@@ -7,15 +7,15 @@ const MainFooter = () => {
     { icon: Linkedin, href: '#' },
   ];
   const footerLinks = {
-    Platform: [
-      { label: 'Courses', href: '/courses' },
-      { label: 'About Us', href: '#' },
-      { label: 'Instructors', href: '#' },
+    'Nền tảng': [
+      { label: 'Khóa học', href: '/courses' },
+      { label: 'Về chúng tôi', href: '#' },
+      { label: 'Giảng viên', href: '#' },
     ],
-    Company: [
+    'Công ty': [
       { label: 'Blog', href: '#' },
-      { label: 'Careers', href: '#' },
-      { label: 'Contact', href: '#' },
+      { label: 'Tuyển dụng', href: '#' },
+      { label: 'Liên hệ', href: '#' },
     ],
   };
   return (
@@ -28,7 +28,7 @@ const MainFooter = () => {
               <span className="text-2xl font-bold font-display text-cognita-slate dark:text-white">Cognita</span>
             </Link>
             <p className="text-muted-foreground text-base">
-              Unlock your potential with our engaging and interactive online courses.
+              Mở khóa tiềm năng của bạn với các khóa học trực tuyến hấp dẫn và tương tác của chúng tôi.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((link, index) => (
@@ -57,7 +57,7 @@ const MainFooter = () => {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t text-center text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Cognita. All rights reserved. Built with ❤️ at Cloudflare.</p>
+          <p>&copy; {new Date().getFullYear()} Code by Hoàng An</p>
         </div>
       </div>
     </footer>

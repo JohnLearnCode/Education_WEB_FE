@@ -6,18 +6,32 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuthStore } from '@/store/authStore';
+
 const SignUpPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const navigate = useNavigate();
-  const login = useAuthStore(state => state.login);
-  const handleSubmit = (e: React.FormEvent) => {
+  const { register: registerUser } = useAuthStore();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate creating an account and logging in
-    login({ name, email });
-    navigate('/dashboard');
+    try {
+      await registerUser({
+        name,
+        email,
+        password,
+        dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : undefined,
+        phoneNumber: phoneNumber || undefined,
+      });
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Registration error:', error);
+    }
   };
+
   return (
     <MainLayout>
       <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -52,6 +66,27 @@ const SignUpPage = () => {
                   />
                 </div>
                 <div className="space-y-2">
+                  <Label htmlFor="dateOfBirth">Date of Birth</Label>
+                  <Input
+                    id="dateOfBirth"
+                    type="date"
+                    required
+                    value={dateOfBirth}
+                    onChange={(e) => setDateOfBirth(e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phoneNumber">Phone Number</Label>
+                  <Input
+                    id="phoneNumber"
+                    type="tel"
+                    placeholder="0912345678"
+                    required
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
                   <Label htmlFor="password">Password</Label>
                   <Input
                     id="password"
@@ -78,4 +113,5 @@ const SignUpPage = () => {
     </MainLayout>
   );
 };
+
 export default SignUpPage;

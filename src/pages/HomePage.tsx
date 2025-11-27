@@ -1,13 +1,38 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight, Star, Loader2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import MainLayout from '@/components/layout/MainLayout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import CourseCard from '@/components/CourseCard';
-import { courses, reviews } from '@/lib/mockData';
+import { reviews } from '@/lib/mockData';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { courseApi, CourseResponse } from '@/lib/api';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+
 const HomePage = () => {
-  const featuredCourses = courses.slice(0, 3);
+  const [featuredCourses, setFeaturedCourses] = useState<CourseResponse[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const response = await courseApi.getAllCourses({ page: 1, limit: 3 });
+        setFeaturedCourses(response.courses);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Không thể tải khóa học');
+        console.error('Error fetching courses:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
   const StarRating = ({ rating }: { rating: number }) => (
     <div className="flex items-center">
       {[...Array(5)].map((_, i) => (
@@ -26,19 +51,16 @@ const HomePage = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 text-center md:text-left">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-cognita-slate dark:text-white leading-tight">
-                Unlock Your Potential, One Course at a Time.
+                Mở Khóa Tiềm Năng Của Bạn, Từng Khóa Học Một.
               </h1>
               <p className="text-lg text-muted-foreground max-w-xl mx-auto md:mx-0">
-                Discover a world of knowledge with our illustrative and engaging online courses. Learn from industry experts and join a vibrant community of learners.
+                Khám phá thế giới kiến thức với các khóa học trực tuyến sinh động và hấp dẫn của chúng tôi. Học hỏi từ các chuyên gia trong ngành và tham gia cộng đồng học viên sôi động.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Button size="lg" asChild>
                   <Link to="/courses">
-                    Explore Courses <ArrowRight className="ml-2 h-5 w-5" />
+                    Khám phá khóa học <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link to="/signup">Get Started</Link>
                 </Button>
               </div>
             </div>
@@ -52,30 +74,58 @@ const HomePage = () => {
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-display text-cognita-slate dark:text-white">Featured Courses</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-display text-cognita-slate dark:text-white">Khóa học nổi bật</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Handpicked courses by our experts to help you get started on your learning journey.
+              Các khóa học được chọn lọc kỹ lưỡng bởi chuyên gia để giúp bạn bắt đầu hành trình học tập.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredCourses.map((course) => (
-              <CourseCard key={course.id} course={course} />
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button size="lg" variant="outline" asChild>
-              <Link to="/courses">View All Courses</Link>
-            </Button>
-          </div>
+
+          {/* Loading State */}
+          {loading && (
+            <div className="flex justify-center items-center py-12">
+              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+              <span className="ml-2 text-muted-foreground">Đang tải khóa học...</span>
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && !loading && (
+            <Alert variant="destructive" className="mb-8">
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+
+          {/* Courses Grid */}
+          {!loading && !error && featuredCourses.length > 0 && (
+            <>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {featuredCourses.map((course) => (
+                  <CourseCard key={course._id} course={course} />
+                ))}
+              </div>
+              <div className="text-center mt-12">
+                <Button size="lg" variant="outline" asChild>
+                  <Link to="/courses">Xem tất cả khóa học</Link>
+                </Button>
+              </div>
+            </>
+          )}
+
+          {/* Empty State */}
+          {!loading && !error && featuredCourses.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">Chưa có khóa học nào</p>
+            </div>
+          )}
         </div>
       </section>
       {/* Testimonials Section */}
       <section className="bg-white dark:bg-cognita-slate/50 py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-display text-cognita-slate dark:text-white">What Our Students Say</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-display text-cognita-slate dark:text-white">Học viên nói gì về chúng tôi</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Join thousands of happy learners who transformed their careers with Cognita.
+              Tham gia cùng hàng nghìn học viên hạnh phúc đã thay đổi sự nghiệp của họ với Cognita.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
