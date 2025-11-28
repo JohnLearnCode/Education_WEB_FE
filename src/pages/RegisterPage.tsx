@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { Loader2, Eye, EyeOff, CheckCircle2, XCircle } from 'lucide-react';
+import MainLayout from '@/components/layout/MainLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -130,8 +131,10 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
-      <Card className="w-full max-w-md shadow-lg">
+    <MainLayout>
+      <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-md space-y-8">
+          <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center text-primary">Tạo tài khoản mới</CardTitle>
           <CardDescription className="text-center">
@@ -261,6 +264,8 @@ export default function RegisterPage() {
           </div>
         </CardFooter>
       </Card>
-    </div>
+        </div>
+      </div>
+    </MainLayout>
   );
 }
