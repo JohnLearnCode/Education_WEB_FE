@@ -154,7 +154,7 @@ const LoginPage = () => {
             <CardFooter className="flex justify-center">
               <div className="text-sm text-muted-foreground">
                 Chưa có tài khoản?{' '}
-                <Link to="/register" className="text-primary hover:underline font-medium">
+                <Link to="/signup" className="text-primary hover:underline font-medium">
                   Đăng ký ngay
                 </Link>
               </div>

@@ -65,7 +65,7 @@ const HomePage = () => {
               </div>
             </div>
             <div>
-              <img src="https://placehold.co/600x400/4F46E5/FFFFFF?text=Illustration" alt="Learning illustration" className="rounded-lg shadow-lg" />
+              <img src="https://res.cloudinary.com/duvtv8zwo/image/upload/v1764267329/ChatGPT_Image_Nov_28_2025_01_14_35_AM_o6eomp.png" alt="Learning illustration" className="rounded-lg shadow-lg" />
             </div>
           </div>
         </div>
