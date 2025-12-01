@@ -26,6 +26,8 @@ import InstructorCourseReviewsPage from '@/pages/InstructorCourseReviewsPage';
 import InstructorQuizStatisticsPage from '@/pages/InstructorQuizStatisticsPage';
 import ComplaintPage from '@/pages/ComplaintPage';
 import MyComplaintsPage from '@/pages/MyComplaintsPage';
+import CheckoutPage from '@/pages/CheckoutPage';
+import PaymentResultPage from '@/pages/PaymentResultPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminProtectedRoute from './components/AdminProtectedRoute';
 import AdminLayout from '@/components/layout/AdminLayout';
@@ -155,6 +157,30 @@ const router = createBrowserRouter([
         <MyComplaintsPage />
       </ProtectedRoute>
     ),
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/checkout/:courseId",
+    element: (
+      <ProtectedRoute>
+        <CheckoutPage />
+      </ProtectedRoute>
+    ),
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/payment/success",
+    element: <PaymentResultPage status="success" />,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/payment/error",
+    element: <PaymentResultPage status="error" />,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/payment/cancel",
+    element: <PaymentResultPage status="cancel" />,
     errorElement: <RouteErrorBoundary />,
   },
   {

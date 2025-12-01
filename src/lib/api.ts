@@ -1973,5 +1973,182 @@ export const complaintApi = {
   },
 };
 
+// ==================== ORDER API ====================
+
+// Order Types
+export interface OrderItem {
+  courseId: string;
+  title: string;
+  price: number;
+  thumbnail?: string;
+}
+
+export interface Order {
+  _id: string;
+  userId: string;
+  courses: OrderItem[];
+  totalAmount: number;
+  status: 'pending' | 'completed' | 'failed' | 'cancelled' | 'refunded';
+  paymentMethod: string;
+  transactionId?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateOrderRequest {
+  courseIds: string[];
+  paymentMethod: string;
+}
+
+// Order API Service
+export const orderApi = {
+  /**
+   * Create a new order
+   */
+  createOrder: async (data: CreateOrderRequest, token: string): Promise<Order> => {
+    const response = await fetch(`${API_BASE_URL}/orders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result: ApiResponse<Order> = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || result.error || 'Không thể tạo đơn hàng');
+    }
+
+    if (!result.data) {
+      throw new Error('Không nhận được dữ liệu từ server');
+    }
+
+    return result.data;
+  },
+
+  /**
+   * Get order by ID
+   */
+  getOrderById: async (orderId: string, token: string): Promise<Order> => {
+    const response = await fetch(`${API_BASE_URL}/orders/order/${orderId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    const result: ApiResponse<Order> = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || result.error || 'Không thể lấy thông tin đơn hàng');
+    }
+
+    if (!result.data) {
+      throw new Error('Không nhận được dữ liệu từ server');
+    }
+
+    return result.data;
+  },
+
+  /**
+   * Get my orders
+   */
+  getMyOrders: async (token: string): Promise<Order[]> => {
+    const response = await fetch(`${API_BASE_URL}/orders/my-orders`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    const result: ApiResponse<Order[]> = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || result.error || 'Không thể lấy danh sách đơn hàng');
+    }
+
+    return result.data || [];
+  },
+};
+
+// ==================== SEPAY PAYMENT API ====================
+
+// SePay Types
+export type SepayPaymentMethod = 'BANK_TRANSFER' | 'NAPAS_BANK_TRANSFER';
+
+export interface SepayPaymentResponse {
+  checkoutUrl: string;
+  checkoutFields: Record<string, string | number>;
+  orderId: string;
+  orderAmount: number;
+}
+
+export interface SepayPaymentStatus {
+  status: string;
+  message: string;
+}
+
+// SePay Payment API Service
+export const sepayApi = {
+  /**
+   * Initiate SePay payment
+   */
+  initiatePayment: async (
+    orderId: string,
+    paymentMethod: SepayPaymentMethod,
+    token: string
+  ): Promise<SepayPaymentResponse> => {
+    const response = await fetch(`${API_BASE_URL}/payment/sepay/initiate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ orderId, paymentMethod }),
+    });
+
+    const result: ApiResponse<SepayPaymentResponse> = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || result.error || 'Không thể khởi tạo thanh toán');
+    }
+
+    if (!result.data) {
+      throw new Error('Không nhận được dữ liệu từ server');
+    }
+
+    return result.data;
+  },
+
+  /**
+   * Verify payment status
+   */
+  verifyPayment: async (orderId: string, token: string): Promise<SepayPaymentStatus> => {
+    const response = await fetch(`${API_BASE_URL}/payment/sepay/verify/${orderId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    const result: ApiResponse<SepayPaymentStatus> = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || result.error || 'Không thể kiểm tra trạng thái thanh toán');
+    }
+
+    if (!result.data) {
+      throw new Error('Không nhận được dữ liệu từ server');
+    }
+
+    return result.data;
+  },
+};
+
 // Export helper functions for use in other API files
 export { authFetch, getAuthHeaders };

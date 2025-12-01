@@ -173,6 +173,13 @@ const CourseDetailPage = () => {
     
     if (!id || !token) return;
 
+    // If course has a price > 0, redirect to checkout page
+    if (course && course.price > 0) {
+      navigate(`/checkout/${id}`);
+      return;
+    }
+
+    // Free course - enroll directly
     try {
       setEnrolling(true);
       await enrollmentApi.enrollCourse(id, token);
